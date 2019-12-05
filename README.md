@@ -30,3 +30,60 @@
   "eject": "react-scripts eject"
 }
 ```
+
+###
+```javascript
+
+/*通过process.env.npm_lifecycle_event获取package.json中的scripts
+启动类型（start，test，build等），分别定义不同环境的接口地址*/
+const ENVIRONMENT = process.env.npm_lifecycle_event;
+let serverUrl='';
+if ( ENVIRONMENT === "start") {
+  serverUrl='//www.api.com/api/start';
+}
+if ( ENVIRONMENT === "test") {
+  serverUrl='//www.api.com/api/test';
+}
+if (ENVIRONMENT === "build") {
+  serverUrl='//www.api.com/api/build';
+}
+
+```
+
+### override 基本配置
+
+```javascript
+module.exports = override(
+  //设置按需加载 babel-plugin-import
+  fixBabelImports('import', {
+    libraryName: 'antd-mobile',
+    style: 'css',
+  }),
+  //设置绝对路径别名
+  addWebpackAlias({
+    "modules": path.resolve(__dirname, "src/modules"),
+    "common": path.resolve(__dirname, "src/common"),
+    "components": path.resolve(__dirname, "src/components")
+  }),
+  //less配置函数
+  addLessLoader({
+    javascriptEnabled: true,
+    modifyVars: { '@primary-color': '#1DA57A' }
+  }),
+  //适配通常采用 rem 布局
+  addPostcssPlugins([require('postcss-pxtorem')({
+    rootValue: 16,
+    propList: ['*']
+    // propList: ['*', '!border*', '!font-size*', '!letter-spacing'],
+    // propWhiteList: []
+  }),]),
+  //定义使用环境变量
+  addWebpackPlugin(new webpack.DefinePlugin({
+    'process.env':{
+      'SERVER_URL_START':JSON.stringify(serverUrl),
+      'SERVER_URL_TEST':JSON.stringify(serverUrl),
+      'SERVER_URL_PRD':JSON.stringify(serverUrl),
+    }
+  }))
+);
+```

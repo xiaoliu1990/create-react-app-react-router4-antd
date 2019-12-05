@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from '../../common/httpAjax';
+import axios from 'common/httpAjax';
 import { Slider, WingBlank } from 'antd-mobile';
 import store2 from 'store2';
 
@@ -13,8 +13,8 @@ export default class Doctor extends Component {
   componentDidMount() {
     store2.session('personId', 'p191111114910002e');
     let params = new URLSearchParams(this.props.location.search);
-    console.log(this.props)
-    console.log(params.get('personId'),params.get('id'))
+    //console.log(this.props)
+    //console.log(params.get('personId'),params.get('id'))
     axios({
       url: '/list',
       data: {

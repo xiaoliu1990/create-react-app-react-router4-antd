@@ -2,7 +2,7 @@ import { Toast } from 'antd-mobile';
 import axios from 'axios'
 import { ToastCiYun } from './toast';
 
-const BASE_URL = '//devinspection.love-health.com.cn/portal/fastMedical/';//process.env.BASE_URL;
+const BASE_URL = process.env.SERVER_URL_START;
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.timeout = 30000;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
