@@ -5,6 +5,7 @@ const paths = require('react-scripts/config/paths');
 const path = require('path');
 paths.appBuild = path.join(path.dirname(paths.appBuild), 'dist'); // 修改打包目录
 
+//获取package.json中的scripts启动类型
 const ENVIRONMENT = process.env.npm_lifecycle_event;
 let serverUrl='';
 if ( ENVIRONMENT === "start") {
