@@ -2,8 +2,8 @@ import { Toast } from 'antd-mobile';
 import axios from 'axios'
 import { ToastCiYun } from './toast';
 
-const BASE_URL = process.env.SERVER_URL_START;
-axios.defaults.baseURL = BASE_URL;
+const SERVER_URL = process.env.SERVER_URL;
+axios.defaults.baseURL = SERVER_URL;
 axios.defaults.timeout = 30000;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 //axios.defaults.withCredentials = true;
@@ -20,7 +20,7 @@ axios.interceptors.response.use((res) => {
   ToastCiYun("loadingHide");
   return res;
 }, (error) => {
-  console.log(error);
+  console.log(error); 
   if (error.response) {
     Toast.fail('网络异常，请稍后重试！', 3, '', true)
     // eslint-disable-next-line default-case

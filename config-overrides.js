@@ -45,9 +45,7 @@ module.exports = override(
   //定义使用环境变量
   addWebpackPlugin(new webpack.DefinePlugin({
     'process.env':{
-      'SERVER_URL_START':JSON.stringify(serverUrl),
-      'SERVER_URL_TEST':JSON.stringify(serverUrl),
-      'SERVER_URL_PRD':JSON.stringify(serverUrl),
+      'SERVER_URL':JSON.stringify(serverUrl),
     }
   }))
 );

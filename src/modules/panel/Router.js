@@ -11,10 +11,18 @@ export default [
   },
   {
     path: '/Annual',
+    exact:true,
     meta: {
       title: '个人面板'
     },
     component: asyncComponent(() => import('./Annual'))
+  },
+  {
+    path: '/Annual/:id',
+    meta: {
+      title: '面板详情'
+    },
+    component: asyncComponent(() => import('./Details'))
   },
   {
     path: '/Doctor',

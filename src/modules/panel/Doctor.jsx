@@ -7,18 +7,26 @@ export default class Doctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isBtn: 0
+      isBtn: 0,
+      personId:''
     }
   }
   componentDidMount() {
-    store2.session('personId', 'p191111114910002e');
-    let params = new URLSearchParams(this.props.location.search);
-    //console.log(this.props)
-    //console.log(params.get('personId'),params.get('id'))
+    console.log(this.props,"doctorProps")
+    let personId=store2.session.get('personId');
+    this.setState({
+      personId:personId
+    });
+    this.getData();
+  }
+  handleSubmit(url){
+    this.props.history.push(url);
+  }
+  getData(){
     axios({
       url: '/list',
       data: {
-        'personId': store2.session.get('personId'),
+        'personId': this.state.personId,
         'pageNo': 1,
         'pageSize': 10
       },
@@ -32,17 +40,6 @@ export default class Doctor extends Component {
       }
     });
   }
-  handleSubmit(){
-    this.props.history.push({
-      pathname: '/Annual',
-      query:{
-        personId:'p191111114910002e'
-      },
-      state:{
-        id:'123'
-      }
-    });
-  }
   log = (name) => {
     return (value) => {
       console.log(`${name}: ${value}`);
@@ -53,7 +50,11 @@ export default class Doctor extends Component {
       <div className='container'>
         <div className='app-bd'>
           <div className='app-content'>
-            <button onClick={()=>{this.handleSubmit()}}>点击跳转</button>
+            <ul>
+              <li onClick={()=>{this.handleSubmit("/doctor")}}>医生面板</li>
+              <li onClick={()=>{this.handleSubmit("/annual/110")}}>个人面板</li>    
+            </ul>
+            {this.state.personId}
             <div className='heshun-content'>
               <WingBlank size='lg'>
                 <p className='sub-title'>Slider</p>
