@@ -1,21 +1,26 @@
 
 const { override, fixBabelImports, addWebpackAlias, addLessLoader, addPostcssPlugins, addWebpackPlugin } = require('customize-cra');
-var webpack = require("webpack");
+const webpack = require("webpack");
 const paths = require('react-scripts/config/paths');
 const path = require('path');
-paths.appBuild = path.join(path.dirname(paths.appBuild), 'dist'); // 修改打包目录
 
+// 修改打包目录
+paths.appBuild = path.join(path.dirname(paths.appBuild), 'dist'); 
 //获取package.json中的scripts启动类型
 const ENVIRONMENT = process.env.npm_lifecycle_event;
 let serverUrl='';
-if ( ENVIRONMENT === "start") {
-  serverUrl='//inspection.love-health.com.cn/portal/fastMedical/';
-}
-if ( ENVIRONMENT === "test") {
-  serverUrl='//inspection.love-health.com.cn/portal/fastMedical/';
-}
-if (ENVIRONMENT === "build") {
-  serverUrl='//inspection.ciyun.cn/portal/fastMedical/';
+
+// eslint-disable-next-line default-case
+switch (ENVIRONMENT){
+  case "start":
+    serverUrl='//devinspection.love-health.com.cn/portal/fastMedical/';//开发测试
+  break;
+  case "build:dev":
+    serverUrl='//inspection.love-health.com.cn/portal/fastMedical/';//测试打包
+  break;
+  case "build:pro":
+    serverUrl='//inspection.ciyun.cn/portal/fastMedical/';//上线打包
+  break;
 }
 
 module.exports = override(
