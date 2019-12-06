@@ -27,7 +27,7 @@ module.exports = override(
   //设置按需加载 babel-plugin-import
   fixBabelImports('import', {
     libraryName: 'antd-mobile',
-    style: 'css',
+    style: true,
   }),
   //设置绝对路径别名
   addWebpackAlias({
@@ -38,7 +38,7 @@ module.exports = override(
   //less配置函数
   addLessLoader({
     javascriptEnabled: true,
-    modifyVars: { '@primary-color': '#1DA57A' }
+    modifyVars: { '@fill-body': '##F5F5F5' }
   }),
   //适配通常采用 rem 布局
   addPostcssPlugins([require('postcss-pxtorem')({
