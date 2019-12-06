@@ -34,8 +34,8 @@
 ###
 ```javascript
 
-/*通过process.env.npm_lifecycle_event获取package.json中的scripts
-启动类型（start，test，build等），分别定义不同环境的接口地址*/
+/*通过process.env.npm_lifecycle_event获取package.json中的scripts启动类型
+（start，test，build等），分别定义不同环境的接口地址*/
 const ENVIRONMENT = process.env.npm_lifecycle_event;
 let serverUrl='';
 if ( ENVIRONMENT === "start") {
@@ -86,4 +86,27 @@ module.exports = override(
     }
   }))
 );
+```
+### JSX html包含的写法
+```javascript
+  /*一般来说相邻的JSX元素必须包装在封闭标记中*/
+  render() {
+    return (
+      <div>
+        <div>1</div>
+        <div>2</div>
+      </div>
+    )
+  }
+  /*但是这种写法会多出一个多余的div，有时候会破坏渲染后的整体布局，所以jsx有种进阶
+  做法（类似vuejs的template）*/
+  render() {
+    return (
+      <>
+        <div>1</div>
+        <div>2</div>
+      </>
+    )
+  }
+  /*这样在渲染的时候就不会渲染出封闭标记。*/
 ```

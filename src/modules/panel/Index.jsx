@@ -25,12 +25,13 @@ export default class Ann extends Component {
   }
   render() {
     return (
-      <div>
+      <>
+        <div>超链接</div>
         <ul>
           <li onClick={()=>{this.handleSubmit("/doctor")}}>医生面板</li>  
           <li onClick={()=>{this.handleSubmit("/annual")}}>个人面板</li>  
         </ul>        
-      </div>
+      </>
     )
   }
 }
